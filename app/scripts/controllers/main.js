@@ -31,6 +31,7 @@ weatherModule.controller('MainWeatherController',
             //also make sure that whenever it closes, the element it is focusing on is the text input
             $('#loading-window').modal({
                 keyboard: false,
+                backdrop: 'static',
                 show: false
             }).on('hidden.bs.modal', function() {
                 $('#zipcode-text').focus();
