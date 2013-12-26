@@ -27,9 +27,13 @@ weatherModule.controller('MainWeatherController',
             $scope.modal.title = '';
             $scope.modal.description = '';
 
+            //initialize the modal dialog and have it lying in wait
+            //also make sure that whenever it closes, the element it is focusing on is the text input
             $('#loading-window').modal({
                 keyboard: false,
                 show: false
+            }).on('hidden.bs.modal', function() {
+                $('#zipcode-text').focus();
             });
 
             $scope.weatherResults = [];
@@ -192,7 +196,7 @@ weatherModule.controller('MainWeatherController',
 
                 for (var k = 0; k < testedZipCodes.length; k++) {
                     WeatherService.getWeatherFromZipCode(testedZipCodes[k]).then(getWeatherFromZipCodeSuccess,
-                        getWeatherFromZipCodeError, afterGetWeatherFromZipCode);
+                        getWeatherFromZipCodeError).finally(afterGetWeatherFromZipCode);
                 }
             }
 
@@ -233,6 +237,7 @@ weatherModule.controller('MainWeatherController',
             }).finally(function afterSuccessOrFailure() {
                     //just in case it might not have closed the modal window, try to close it again
                     $('#loading-window').modal('hide');
+
             });
         };
 
