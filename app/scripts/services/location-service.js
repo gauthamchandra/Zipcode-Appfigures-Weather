@@ -17,7 +17,7 @@ weatherModule.factory('LocationService', ['$http', '$q', function($http, $q) {
                         if (position && position.coords && position.coords.latitude && position.coords.longitude) {
                             //we will be using Geonames db for this. Their free service will do reverse geocoding
                             //to figure out the zipcodes
-                            $http.jsonp('http://api.geonames.org/findNearbyPostalCodesJSON?callback=JSON_CALLBACK&' +
+                            $http.jsonp('https://api.geonames.org/findNearbyPostalCodesJSON?callback=JSON_CALLBACK&' +
                                     'username=gchandra&lat=' + position.coords.latitude + '&lng=' +
                                     position.coords.longitude)
                                 .success(function(data) {

@@ -230,6 +230,9 @@ weatherModule.controller('MainWeatherController',
             $('#loading-window').modal('show');
 
             LocationService.getZipcodeFromGeolocation().then(function success(zipcode) {
+
+                $scope.modal.title = 'Using Geolocation to grab Weather Data';
+                $scope.modal.description = 'Please wait while we try to grab weather for zipcode: ' + zipcode;
                 //set the zipcode $scope variable and execute search
                 $scope.data.zipcode = zipcode;
                 getWeatherData();
